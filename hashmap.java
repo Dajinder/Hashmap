@@ -1,4 +1,6 @@
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.util.Set;
 public class hashmap{
     public static void main(String[] args){
@@ -37,19 +39,7 @@ public class hashmap{
     }
 
 
-    public static void solve(){
-        // String str = "babcccdbabcccd";
-        // highestFrequecyOfCharacter(str);
-
-        // int[] arr1 = {1,1,2,2,2,3,5};
-        // int[] arr2 = {1,1,1,2,2,4,5};
-        // getCommonElement1(arr1, arr2);
-        // getCommonElement2(arr1, arr2);
-
-        int[] arr = {10,5,9,1,11,8,6,15,3,12,2};
-        longestConsecutiveSequence(arr);
-
-    }
+    
 
     public static void highestFrequecyOfCharacter(String str){
         HashMap<Character, Integer>hm = new HashMap<>();
@@ -115,6 +105,7 @@ public class hashmap{
                 hm.put(arr2[i],nf);
             }
         }
+        
     }
 
     public static void longestConsecutiveSequence(int[] arr){
@@ -153,5 +144,83 @@ public class hashmap{
         System.out.println(maxStartingPoint + " -> " + maxLength);
     }
 
-    
+    public static void hashmap_questions(){
+        // String str = "babcccdbabcccd";
+        // highestFrequecyOfCharacter(str);
+
+        // int[] arr1 = {1,1,2,2,2,3,5};
+        // int[] arr2 = {1,1,1,2,2,4,5};
+        // getCommonElement1(arr1, arr2);
+        // getCommonElement2(arr1, arr2);
+
+        // int[] arr = {10,5,9,1,11,8,6,15,3,12,2};
+        // longestConsecutiveSequence(arr);
+
+    }
+
+    //=============================== PRIORITY_QUEUE ============================================
+
+    public static void priorityqueue_sort_ascending(int[] arr){
+        PriorityQueue<Integer>pq = new PriorityQueue<>();
+        
+
+        for(int i=0;i<arr.length;i++){  //n
+            pq.add(arr[i]); //log n
+        }
+
+        for(int i=0;i<arr.length;i++){  //n
+            System.out.println(pq.peek());  //o(1)
+            pq.remove(); //log n
+        }
+    }
+
+    public static void priorityqueue_sort_descending(int[] arr){
+        PriorityQueue<Integer>pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+
+        for(int i=0;i<arr.length;i++){  //n
+            pq.add(arr[i]); //log n
+        }
+
+        for(int i=0;i<arr.length;i++){  //n
+            System.out.println(pq.peek());  //o(1)
+            pq.remove(); //log n
+        }
+    }
+
+
+    public static void kLargestElements(int k, int[] arr){
+        PriorityQueue<Integer>pq = new PriorityQueue<>();
+        for(int i=0;i<arr.length;i++){
+            if(i < k){
+                pq.add(arr[i]);
+            }else{
+                if(arr[i]>pq.peek()){
+                    pq.remove();
+                    pq.add(arr[i]);
+                }
+            }
+        }
+
+        while(pq.size() > 0){
+            System.out.println(pq.remove());
+        }
+    }
+
+
+    public static void priorityqueue_(){
+        // int[] arr = {22,99,81,3,12,1};
+        // priorityqueue_sort_ascending(arr);
+        // priorityqueue_sort_descending(arr);
+        
+        // int[] arr = {2,10,5,17,7,18,6,4};
+        // kLargestElements(3, arr);
+
+    }
+
+    public static void solve(){
+        // hashmap_questions();
+        priorityqueue_();
+    }
+
 }
