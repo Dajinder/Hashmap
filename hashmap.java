@@ -6,6 +6,7 @@ public class hashmap{
     public static void main(String[] args){
         // hash_map();
         solve();
+        
     }
     public static void hash_map(){
         //basic functions of hashmap
@@ -207,6 +208,86 @@ public class hashmap{
         }
     }
 
+    public static void ksortedArray(int k, int[] arr){
+        PriorityQueue<Integer>pq = new PriorityQueue<>();
+
+        for(int i=0;i<=k;i++){
+            pq.add(arr[i]);
+        }
+        for(int i=k+1;i<arr.length;i++){
+            System.out.println(pq.remove());
+            pq.add(arr[i]);
+        }
+
+        while(pq.size()!=0){
+            System.out.println(pq.remove());
+        }
+    }
+
+    //================================ MEDIAN PRIORITY QUEUE ======================================
+
+    public static class medianPriorityQueue{
+        PriorityQueue<Integer>pq1 = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer>pq2 = new PriorityQueue<>();
+        
+        public void add(int val){
+            if(pq2.size()>0 && val > pq2.peek() ){
+                pq2.add(val);
+            } else{
+                pq1.add(val);
+            }
+
+            if(pq1.size()-pq2.size() == 2){
+                pq2.add(pq1.remove());
+            }else if(pq2.size()-pq1.size() == 2){
+                pq1.add(pq2.remove());
+            }
+        }
+
+        public  int peek(){
+            
+            if(this.size()==0){
+                return -1;
+            }
+
+            if(pq1.size()>=pq2.size()){
+                return pq1.peek();
+            }else{
+                return pq2.peek();
+            }
+        }
+
+        public  int remove(){
+            if(this.size()==0){
+                return -1;
+            }
+            else if(pq1.size()>=pq2.size()){
+                return pq1.remove();
+            }else{
+                return pq2.remove();
+            }
+        }
+
+        public  int size(){
+            return pq1.size()+pq2.size();
+        }
+    }
+
+    public static void medianPriorityQueue_(){
+        medianPriorityQueue mp = new medianPriorityQueue();
+        mp.add(10);
+        mp.add(20);
+        mp.add(30);
+        mp.add(40);
+        mp.add(50);
+        mp.add(5);
+        mp.add(60);
+        System.out.println(mp.peek()) ;
+        mp.remove();
+        System.out.println(mp.peek()) ;
+    }
+ 
+    //==========================================================================================================
 
     public static void priorityqueue_(){
         // int[] arr = {22,99,81,3,12,1};
@@ -216,11 +297,15 @@ public class hashmap{
         // int[] arr = {2,10,5,17,7,18,6,4};
         // kLargestElements(3, arr);
 
+        // int[] arr = {2,3,1,4,6,7,5,8,9};
+        // ksortedArray(2,arr);
+
     }
 
     public static void solve(){
         // hashmap_questions();
-        priorityqueue_();
+        // priorityqueue_();
+        medianPriorityQueue_();
     }
 
 }
